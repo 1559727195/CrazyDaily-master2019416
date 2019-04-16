@@ -1,0 +1,161 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+def configs = rootProject.ext.android //android配置
+android {
+    compileSdkVersion configs.compileSdkVersion
+    defaultConfig {
+        applicationId "com.crazysunj.crazydaily"
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+        multiDexEnabled true
+        /**
+         * 必须加，否则64位手机无法加载so文件
+         */
+        ndk {
+            abiFilters "x86", "armeabi", "armeabi-v7a"
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+        manifestPlaceholders = [
+                SCHEME: "crazydaily",
+                HOST  : "crazysunj.com"
+        ]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+        maxProcessCount 8
+    }
+
+    aaptOptions {
+        // 禁止构建时压缩png图片
+        cruncherEnabled false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    def listSubFile = {
+        def folders = []
+        def valuesFolder = 'src/main/res/values'
+        def valuesFiles = file(valuesFolder).listFiles()
+        valuesFiles.each {
+            item -> folders.add(item.absolutePath)
+        }
+        folders.add(file(valuesFolder).parentFile.absolutePath)
+        def layoutFolder = 'src/main/res/layout'
+        def layoutFiles = file(layoutFolder).listFiles()
+        layoutFiles.each {
+            item -> folders.add(item.absolutePath)
+        }
+        folders.add(file(layoutFolder).parentFile.absolutePath)
+        return folders
+    }
+    sourceSets {
+        main {
+            res.srcDirs = listSubFile()
+        }
+    }
+}
+
+dependencies {
+    def libs = rootProject.ext.dependencies
+    //依赖库配置
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation libs.constraintlayout
+    //约束布局
+    implementation libs.appcompat
+    implementation libs.recyclerview
+    implementation libs.cardview
+    implementation libs.material
+    implementation libs.gpuimage
+    //图像处理
+    implementation libs.multidex
+    implementation libs.MTRVA
+    //recyclerview数据处理
+    implementation libs.statusbarutil
+    //状态栏
+    implementation libs.pickerdialog
+    //选择对话框
+    implementation libs.circleimageview
+    //圆形imageview
+    implementation(libs.niceVieoPlayer) {
+        exclude group: 'androidx.appcompat'
+    }
+    //视频播放
+    implementation libs.cardslideview
+    //卡片轮播
+    implementation libs.fastjson
+    implementation libs.weex
+    implementation libs.wavesidebar
+    //字符波浪滑动
+    implementation libs.shimmer
+    implementation libs.lottie
+    implementation libs.photoview
+    implementation libs.ucrop
+    //裁剪
+    implementation libs.zxing
+    //二维码
+    implementation libs.pgyer
+    //蒲公英
+    implementation libs.itemDecoration
+    //recyclerviewItemDecoration
+    implementation libs.roundedimageview
+    // 圆角
+    implementation libs.longImage
+    // 长图
+    implementation libs.switchButton
+    // 仿ios开关
+    debugImplementation libs.debugLeakcanary
+    releaseImplementation libs.releaseLeakcanary
+    implementation libs.butterknife
+    kapt libs.butterknifeCompiler
+    implementation project(':data')
+    implementation libs.materialsearchview
+    implementation libs.glide
+    implementation(libs.glideTransformations) {
+        exclude group: 'com.github.bumptech.glide', module: 'glide'
+    }
+    kapt libs.glideCompiler
+    implementation libs.permission
+    //权限
+    kapt libs.permissionCompiler
+    implementation libs.sonic
+    kapt libs.daggerCompiler
+
+    implementation libs.navigationFragment
+    implementation(libs.navigationUi) {
+        exclude group: 'androidx.cardview'
+    }
+
+
+//    implementation project(':flutter')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    // 依赖flutter
+}
+
+

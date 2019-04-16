@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_photo_bg"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.photo.PhotoActivity">
+
+    <com.crazysunj.crazydaily.view.photo.PhotoDrawerLayout
+        android:id="@+id/photo_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.crazysunj.crazydaily.view.statusbar.StatusBarView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/photo_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:popupTheme="@style/PhotoTheme.MenuTheme"
+                app:titleTextColor="@color/color_white" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="@string/transition_photo" />
+        </LinearLayout>
+
+        <include layout="@layout/include_photo_settings" />
+
+    </com.crazysunj.crazydaily.view.photo.PhotoDrawerLayout>
+</FrameLayout>

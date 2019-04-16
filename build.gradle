@@ -1,0 +1,42 @@
+apply from: "config.gradle"
+buildscript {
+    ext.kotlin_version = '1.3.11'
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+        maven { url "https://jitpack.io" }
+        maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+//        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+tasks.whenTaskAdded { task ->
+    // Android 测试相关
+    if (task.name.contains('AndroidTest')
+            || task.name.contains('mockableAndroidJar')
+            || task.name.contains('UnitTest')
+            //关闭NDK和JNI
+            || task.name.contains('Ndk')
+            || task.name.contains('Jni')) {
+        task.enabled = false
+    }
+}

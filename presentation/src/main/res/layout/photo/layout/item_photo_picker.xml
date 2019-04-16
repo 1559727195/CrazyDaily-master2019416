@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.crazysunj.crazydaily.view.photo.PhotoPickerWrapLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_photo_picker_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:id="@+id/item_photo_picker_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_photo_picker_video_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/space_10"
+        android:paddingTop="@dimen/space_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_10"
+            android:src="@mipmap/ic_video" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_photo_picker_duration"
+            style="@style/text_12_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="13:00" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/item_photo_picker_select_wrap"
+        android:layout_width="@dimen/space_40"
+        android:layout_height="@dimen/space_40"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_photo_picker_select"
+            style="@style/text_12_white"
+            android:layout_width="@dimen/space_20"
+            android:layout_height="@dimen/space_20"
+            android:layout_marginStart="@dimen/space_10"
+            android:layout_marginTop="@dimen/space_10"
+            android:background="@drawable/image_photo_picker_selector"
+            android:fontFamily="@font/crazydailyicon"
+            android:gravity="center"
+            android:text="@string/ic_tick" />
+    </FrameLayout>
+
+</com.crazysunj.crazydaily.view.photo.PhotoPickerWrapLayout>

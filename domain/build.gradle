@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao'
+def configs = rootProject.ext.android //android配置
+android {
+    compileSdkVersion configs.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.crazysunj.domain.db'
+    targetGenDir 'src/main/java'
+}
+
+dependencies {
+
+    def domainDependencies = rootProject.ext.domainDependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly domainDependencies.MTRVA
+    compileOnly domainDependencies.gson
+    compileOnly domainDependencies.annotation
+    compileOnly(domainDependencies.niceVieoPlayer) {
+        exclude group: 'androidx.appcompat'
+    }
+
+    api domainDependencies.greendao
+    api domainDependencies.javaxInject
+    api domainDependencies.rxjava
+    api domainDependencies.rxandroid
+    api(domainDependencies.tray) {
+        exclude group: 'androidx.annotation'
+    }
+
+    implementation domainDependencies.arrow
+    implementation domainDependencies.tinypinyin
+}
+

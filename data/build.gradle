@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+def configs = rootProject.ext.android //android配置
+android {
+    compileSdkVersion configs.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    def dataDependencies = rootProject.ext.dataDependencies //依赖库配置
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':domain')
+
+    compileOnly dataDependencies.MTRVA
+    compileOnly dataDependencies.annotation
+    compileOnly(dataDependencies.niceVieoPlayer) {
+        exclude group: 'androidx.appcompat'
+    }
+
+    api dataDependencies.retrofit
+    api dataDependencies.retrofitConverterGson
+    api dataDependencies.retrofitAdapterRxjava
+    api dataDependencies.okhttp
+    implementation dataDependencies.okhttpLoggingInterceptor
+    api dataDependencies.dagger
+    kapt dataDependencies.daggerCompiler
+    implementation(dataDependencies.logger) {
+        exclude group: 'androidx.annotation'
+    }
+    implementation dataDependencies.cookie
+}

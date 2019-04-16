@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/note_edit_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/note_edit_cancel"
+            style="@style/text_16_999999"
+            android:layout_width="@dimen/space_80"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:text="@string/cancel" />
+
+        <TextView
+            style="@style/text_20_333333"
+            android:layout_width="@dimen/space_120"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/index" />
+
+        <FrameLayout
+            android:id="@+id/note_edit_submit"
+            android:layout_width="@dimen/space_80"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <TextView
+                android:id="@+id/note_edit_submit_btn"
+                style="@style/text_14_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/space_14"
+                android:background="@drawable/selector_note_edit_submit"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/publish" />
+        </FrameLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/note_edit_toolbar"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/note_edit_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:padding="@dimen/space_10" />
+
+            <com.crazysunj.crazydaily.view.note.NoteEditText
+                android:id="@+id/note_edit_content_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/space_40"
+                android:paddingEnd="@dimen/space_15"
+                android:paddingStart="@dimen/space_15"
+                android:paddingTop="@dimen/space_20"
+                app:note_hint_text="每天写一点点，就多积累一点点"
+                app:note_text_size="@dimen/text_16" />
+
+            <View
+                style="@style/horizontal_line"
+                android:layout_marginEnd="@dimen/space_15"
+                android:layout_marginStart="@dimen/space_15" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/space_15"
+                android:paddingEnd="@dimen/space_15"
+                android:paddingStart="@dimen/space_15"
+                android:paddingTop="@dimen/space_15">
+
+                <TextView
+                    style="@style/text_16_666666"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="是否同意他人下载图片"
+                    tools:ignore="HardcodedText" />
+
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/note_edit_can_image_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:sb_checked="true"
+                    app:sb_checked_color="@color/colorPrimary"
+                    app:sb_show_indicator="false" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/note_edit_drag_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_50"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/space_5">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/note_edit_drag_delete_text"
+            style="@style/text_12_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            tools:text="拖拽到此处删除" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/note_edit_drag_delete_icon"
+            android:layout_width="@dimen/space_16"
+            android:layout_height="@dimen/space_20"
+            android:layout_above="@id/note_edit_drag_delete_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/space_6"
+            android:scaleType="fitEnd"
+            android:src="@mipmap/ic_delete_unopen" />
+    </RelativeLayout>
+</RelativeLayout>

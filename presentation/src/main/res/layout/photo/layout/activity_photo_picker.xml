@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/photo_picker_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:title="@string/image_video"
+        app:titleTextColor="@color/color_white">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/photo_picker_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingEnd="@dimen/space_16"
+            android:paddingStart="@dimen/space_16"
+            android:textColor="@drawable/text_photo_picker_selector"
+            android:textSize="@dimen/text_14"
+            tools:text="完成" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photo_picker_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/photo_picker_time_info"
+            style="@style/text_12_white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_30"
+            android:background="#80000000"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/space_10"
+            android:paddingStart="@dimen/space_10" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_60"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/space_10"
+        android:paddingStart="@dimen/space_10">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/photo_picker_select"
+            style="@style/text_16_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/image_video" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/space_20"
+            android:layout_height="@dimen/space_20"
+            android:layout_alignBottom="@id/photo_picker_select"
+            android:layout_toEndOf="@id/photo_picker_select"
+            android:src="@mipmap/ic_triangle" />
+    </RelativeLayout>
+
+</LinearLayout>
