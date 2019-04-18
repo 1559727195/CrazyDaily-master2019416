@@ -1,6 +1,8 @@
 include ':presentation', ':data', ':domain'
-//setBinding(new Binding([gradle: this]))
+setBinding(new Binding([gradle: this]))
 //evaluate(new File(
 //        settingsDir.parentFile,
-//        '/CrazyDaily-master/crazydaily_flutter/flutter_android/include_flutter.groovy'
+//        'CrazyDaily-master/crazydaily_flutter/.android/include_flutter.groovy'
 //))
+
+
