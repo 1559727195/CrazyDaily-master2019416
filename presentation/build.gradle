@@ -153,7 +153,7 @@ dependencies {
     }
 
 
-//    implementation project(':flutter')
+    implementation project(':flutter')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     // 依赖flutter
 
